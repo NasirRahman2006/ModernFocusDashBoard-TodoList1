@@ -101,19 +101,19 @@
   text-align:center;
 
   font-family:'Segoe UI',sans-serif;
-  font-size:13px;
-  font-weight:700;
+  font-size:14px;
+  font-weight:800;
 
-  color:#e2e8f0;
+  color:#e2e8f0e3;
   line-height:1.5;
 
   padding:10px 10px;
 
-  background:rgba(255,255,255,0.03);
+  background:rgba(255, 255, 255, 0.096);
   border:1px solid rgba(255,255,255,0.05);
   border-radius:10px;
 
-  transition:opacity .3s ease;
+  transition:opacity .5s ease;
 
   min-height:30px;
 
@@ -477,7 +477,7 @@
 }
 
 #streak-title-display{
-  font-size:17px;
+  font-size:18px;
   font-weight:700;
   color:#00a5ec;
   letter-spacing:1px;
@@ -616,14 +616,14 @@
 
   <div id="goalBox"
   style="
-  margin-top:-4px;
-  margin-bottom:8px;
-  font-size:13px;
-  font-weight:700;
+  margin-top:10px;
+  margin-bottom:14px;
+  font-size:14.5px;
+  font-weight:800;
   text-align:center;
   line-height:1.7;
   font-family:'Segoe UI',Roboto,sans-serif;
-  letter-spacing:0.3px;
+  letter-spacing:0.4px;
   ">
   No Goals Yet
   </div>
@@ -638,8 +638,8 @@
       <span class="status-label">🎯 Target Total</span>
       <span class="status-value" id="display-target">14 SESSIONS (60/10)</span>
     </div>
-    <div class="status-item" style="grid-column: span 2; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 6px; margin-top: 2px;">
-      <span class="milestone-label">🍱 Milestones (Lunch | Nap | Dinner)</span>
+    <div class="status-item" style="grid-column: span 2; border-top: 2px solid rgba(255, 255, 255, 0.137); padding-top: 6px; margin-top: 2px;">
+      <span class="milestone-label">🍱ALL Breaks (Lunch | Nap | Dinner)</span>
       <span class="milestone-value" id="display-milestones">Lunch: S3 (20m) | Nap: S5 (40m) | Dinner: S9 (20m)</span>
     </div>
   </div>
@@ -665,10 +665,10 @@
     border-radius:8px;
     font-weight:900;
     font-size:12px;
-    background:linear-gradient(90deg,#ffaa00,#ff6600);
+    background:linear-gradient(90deg,#ff7b00,#ffe600);
     color:white;
     cursor:pointer;
-    opacity:.4;
+    opacity:.5;
     ">
     🎁 REWARD 
     </button>
@@ -800,7 +800,7 @@ document.getElementById('goal-date-display');
       const lastReset = localStorage.getItem("lastResetDate");
       const today = now.toDateString();
       
-      if (now.getHours() >= 6 && lastReset !== today) {
+      if (now.getHours() >= 4 && lastReset !== today) {
           if (currentSessionCount < 10) streakDays = 0;
           currentSessionCount = 0;
           playerXP = 0;
@@ -903,7 +903,7 @@ document.getElementById('goal-date-display');
 
   function awardXP() {
 
-    totalMinutes += 60;
+    totalMinutes += parseInt(timeInput.value);
     if(totalMinutes >= 60){
       totalHours += Math.floor(totalMinutes / 60);
       totalMinutes = totalMinutes % 60;
@@ -1006,61 +1006,87 @@ sessionDisplay.innerText =
 
   function formatTime(s) { return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
 
-
-
   function startTimer() {
-    // ১. টাইমার যদি ০ থাকে, তবে স্টার্ট বাটন কাজ করবে না (লক)
-    if (isCounting || totalSeconds === 0) return; 
-    
-    isCounting = true;
-    
-    countdownInterval = setInterval(() => {
-      if (totalSeconds > 0) { 
-        totalSeconds--; 
-        updateUI(); 
-      } else {
-        clearInterval(countdownInterval); 
-        isCounting = false;
-        
-        // ২. টাইমার ০ হলে সেশন বাড়ান এবং সেশন লক করার লজিক
-        if (currentMode === 'FORCE') {
-          currentSessionCount++; 
-          totalLifetimeSessions++; 
-          awardXP(); 
-          updateStreak(); 
-          saveAll(); 
-          updateUI();
-          if (selectedGoal && goals[selectedGoal]) {
-    goals[selectedGoal].hours += 1;
-    saveGoals();
+
+if(isCounting) return;
+
+isCounting = true;
+
+countdownInterval = setInterval(()=>{
+
+if(totalSeconds > 0){
+
+    totalSeconds--;
+    updateUI();
+
 }
 
-rewardUnlocked = true;
 
-const rewardBtn =
-document.getElementById("rewardBtn");
+if(totalSeconds === 0){
 
-rewardBtn.innerText = "🎁 CLAIM REWARD";
-rewardBtn.style.opacity = "1";
-
-rewardBtn.style.boxShadow =
-"0 0 20px #ffaa00";
+    clearInterval(countdownInterval);
+    isCounting = false;
 
 
-          alert("Session Complete! Total Sessions: " + currentSessionCount);
-          
-          // টাইমার ০ করে রাখা যাতে স্টার্ট বাটনে ক্লিক করলেও আর না বাড়ে
-          totalSeconds = 0; 
-          updateUI();
-        } else {
-          alert("Break Complete! Now start your next study session.");
-          totalSeconds = 0; // ব্রেক মোডের জন্যও লক
+    if(currentMode === 'FORCE'){
+
+        currentSessionCount++;
+        totalLifetimeSessions++;
+
+        awardXP();
+        updateStreak();
+        saveAll();
+
+
+        if(selectedGoal && goals[selectedGoal]){
+
+            goals[selectedGoal].hours =
+            Number(goals[selectedGoal].hours) + 1;
+
+            saveGoals();
+
         }
-      }
-    }, 1000);
+
+
+        renderGoals();
+        updateActiveGoalBox();
+
+
+        rewardUnlocked = true;
+
+        const rewardBtn =
+        document.getElementById("rewardBtn");
+
+        rewardBtn.innerText = "🎁 CLAIM REWARD";
+        rewardBtn.style.opacity = "1";
+        rewardBtn.style.boxShadow =
+        "0 0 20px #ffaa00";
+
+
+        alert(
+        "Session Complete! Total Sessions: "
+        + currentSessionCount
+        );
+
+
+    } else {
+
+        alert(
+        "Break Complete! Now start your next study session."
+        );
+
+    }
+
+
+    totalSeconds = 0;
+    updateUI();
+
 }
 
-  
+
+},1000);
+
+}
   
 const disciplineTips = [
 "Success is not final, failure is not fatal. – Winston Churchill",
@@ -1230,7 +1256,79 @@ function updateDisciplineTip(){
  }
 }
 
+function startTimer() {
 
+if(isCounting) return;
+
+isCounting = true;
+
+countdownInterval = setInterval(()=>{
+
+if(totalSeconds > 0){
+
+    totalSeconds--;
+    updateUI();
+
+}
+
+if(totalSeconds === 0){
+
+    clearInterval(countdownInterval);
+    isCounting = false;
+
+
+    if(currentMode === 'FORCE'){
+
+        currentSessionCount++;
+        totalLifetimeSessions++;
+
+        awardXP();
+        updateStreak();
+        saveAll();
+
+
+        // goal +1 hour
+        if(selectedGoal && goals[selectedGoal]){
+
+            goals[selectedGoal].hours =
+            Number(goals[selectedGoal].hours) + 1;
+
+            saveGoals();
+
+        }
+
+
+        renderGoals();
+        updateActiveGoalBox();
+
+
+        updateUI();
+
+
+        alert(
+        "Session Complete! Total Sessions: "
+        + currentSessionCount
+        );
+
+
+    } else {
+
+        alert(
+        "Break Complete! Now start your next study session."
+        );
+
+    }
+
+
+    // lock at 00:00
+    totalSeconds = 0;
+    updateUI();
+
+}
+
+},1000);
+
+}
 
 
 
@@ -1477,10 +1575,10 @@ document.getElementById('createGoal').style.background =
         target: t,
         goalDays: days,
         since: new Date().toLocaleDateString('en-GB', {
-          day: 'numeric',
-          month: 'short',
-          year: 'numeric'
-        })
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric'
+})
       };
   
       selectedGoal = n;
@@ -1586,66 +1684,51 @@ alert("🗑️ Goal Deleted Successfully!");
     updateActiveGoalBox();
   });
 
-  
-
   function updateActiveGoalBox(){
 
-
 if(!selectedGoal || !goals[selectedGoal]){
-
-goalDateDisplay.innerText = "-";
-
-streakDisplay.innerText = "0 DAYS";
-
-streakTitleDisplay.innerText = "NO TARGET";
-
-return;
+  goalDateDisplay.innerText = "-";
+  streakDisplay.innerText = "0 DAYS";
+  streakTitleDisplay.innerText = "NO TARGET";
+  return;
 }
 
-
-
 const g = goals[selectedGoal];
-goalDateDisplay.innerText = g.since;
 
-
-
+// fixed created date
 const created = new Date(g.since);
 const now = new Date();
 
-// 6AM reset system
+// BD 4AM reset logic (তোমার সিস্টেম অনুযায়ী)
 const currentDay = new Date(now);
-
-if(currentDay.getHours() < 6){
+if(currentDay.getHours() < 4){
   currentDay.setDate(currentDay.getDate() - 1);
 }
-
-currentDay.setHours(6,0,0,0);
+currentDay.setHours(4,0,0,0);
 
 const startDay = new Date(created);
-startDay.setHours(6,0,0,0);
+startDay.setHours(4,0,0,0);
 
-const daysPassed = Math.max(
-  0,
-  Math.floor(
-    (currentDay - startDay) /
-    (1000 * 60 * 60 * 24)
-  )
+// total days passed (NO negative)
+let daysPassed = Math.floor(
+  (currentDay - startDay) / (1000 * 60 * 60 * 24)
 );
 
-const daysLeft =
-Math.max(
-  0,
-  g.goalDays - daysPassed
-);
+if(daysPassed < 0) daysPassed = 0;
 
-streakDisplay.innerText =
-`${daysLeft} DAYS LEFT`;
+// remaining days
+const daysLeft = Math.max(0, g.goalDays - daysPassed);
 
+// UI FIXED OUTPUT
+streakDisplay.innerText = `Total ${daysPassed} DAYS of ${g.goalDays}`;
 
-streakTitleDisplay.innerText =
-selectedGoal.toUpperCase();
+streakTitleDisplay.innerText = selectedGoal.toUpperCase();
 
+goalDateDisplay.innerText =
+`Since ${g.since}`;
 }
+
+  
 setInterval(updateDisciplineTip,3500);
 updateDisciplineTip();
 updateActiveGoalBox();
