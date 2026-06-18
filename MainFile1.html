@@ -903,7 +903,7 @@ document.getElementById('goal-date-display');
 
   function awardXP() {
 
-    totalMinutes += 60;
+    totalMinutes += parseInt(timeInput.value);
     if(totalMinutes >= 60){
       totalHours += Math.floor(totalMinutes / 60);
       totalMinutes = totalMinutes % 60;
@@ -1006,61 +1006,87 @@ sessionDisplay.innerText =
 
   function formatTime(s) { return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
 
-
-
   function startTimer() {
-    // ১. টাইমার যদি ০ থাকে, তবে স্টার্ট বাটন কাজ করবে না (লক)
-    if (isCounting || totalSeconds === 0) return; 
-    
-    isCounting = true;
-    
-    countdownInterval = setInterval(() => {
-      if (totalSeconds > 0) { 
-        totalSeconds--; 
-        updateUI(); 
-      } else {
-        clearInterval(countdownInterval); 
-        isCounting = false;
-        
-        // ২. টাইমার ০ হলে সেশন বাড়ান এবং সেশন লক করার লজিক
-        if (currentMode === 'FORCE') {
-          currentSessionCount++; 
-          totalLifetimeSessions++; 
-          awardXP(); 
-          updateStreak(); 
-          saveAll(); 
-          updateUI();
-          if (selectedGoal && goals[selectedGoal]) {
-    goals[selectedGoal].hours += 1;
-    saveGoals();
+
+if(isCounting) return;
+
+isCounting = true;
+
+countdownInterval = setInterval(()=>{
+
+if(totalSeconds > 0){
+
+    totalSeconds--;
+    updateUI();
+
 }
 
-rewardUnlocked = true;
 
-const rewardBtn =
-document.getElementById("rewardBtn");
+if(totalSeconds === 0){
 
-rewardBtn.innerText = "🎁 CLAIM REWARD";
-rewardBtn.style.opacity = "1";
-
-rewardBtn.style.boxShadow =
-"0 0 20px #ffaa00";
+    clearInterval(countdownInterval);
+    isCounting = false;
 
 
-          alert("Session Complete! Total Sessions: " + currentSessionCount);
-          
-          // টাইমার ০ করে রাখা যাতে স্টার্ট বাটনে ক্লিক করলেও আর না বাড়ে
-          totalSeconds = 0; 
-          updateUI();
-        } else {
-          alert("Break Complete! Now start your next study session.");
-          totalSeconds = 0; // ব্রেক মোডের জন্যও লক
+    if(currentMode === 'FORCE'){
+
+        currentSessionCount++;
+        totalLifetimeSessions++;
+
+        awardXP();
+        updateStreak();
+        saveAll();
+
+
+        if(selectedGoal && goals[selectedGoal]){
+
+            goals[selectedGoal].hours =
+            Number(goals[selectedGoal].hours) + 1;
+
+            saveGoals();
+
         }
-      }
-    }, 1000);
+
+
+        renderGoals();
+        updateActiveGoalBox();
+
+
+        rewardUnlocked = true;
+
+        const rewardBtn =
+        document.getElementById("rewardBtn");
+
+        rewardBtn.innerText = "🎁 CLAIM REWARD";
+        rewardBtn.style.opacity = "1";
+        rewardBtn.style.boxShadow =
+        "0 0 20px #ffaa00";
+
+
+        alert(
+        "Session Complete! Total Sessions: "
+        + currentSessionCount
+        );
+
+
+    } else {
+
+        alert(
+        "Break Complete! Now start your next study session."
+        );
+
+    }
+
+
+    totalSeconds = 0;
+    updateUI();
+
 }
 
-  
+
+},1000);
+
+}
   
 const disciplineTips = [
 "Success is not final, failure is not fatal. – Winston Churchill",
@@ -1230,7 +1256,79 @@ function updateDisciplineTip(){
  }
 }
 
+function startTimer() {
 
+if(isCounting) return;
+
+isCounting = true;
+
+countdownInterval = setInterval(()=>{
+
+if(totalSeconds > 0){
+
+    totalSeconds--;
+    updateUI();
+
+}
+
+if(totalSeconds === 0){
+
+    clearInterval(countdownInterval);
+    isCounting = false;
+
+
+    if(currentMode === 'FORCE'){
+
+        currentSessionCount++;
+        totalLifetimeSessions++;
+
+        awardXP();
+        updateStreak();
+        saveAll();
+
+
+        // goal +1 hour
+        if(selectedGoal && goals[selectedGoal]){
+
+            goals[selectedGoal].hours =
+            Number(goals[selectedGoal].hours) + 1;
+
+            saveGoals();
+
+        }
+
+
+        renderGoals();
+        updateActiveGoalBox();
+
+
+        updateUI();
+
+
+        alert(
+        "Session Complete! Total Sessions: "
+        + currentSessionCount
+        );
+
+
+    } else {
+
+        alert(
+        "Break Complete! Now start your next study session."
+        );
+
+    }
+
+
+    // lock at 00:00
+    totalSeconds = 0;
+    updateUI();
+
+}
+
+},1000);
+
+}
 
 
 
