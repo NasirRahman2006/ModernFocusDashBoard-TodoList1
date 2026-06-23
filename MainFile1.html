@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +26,7 @@
     border: 1px solid rgba(0, 242, 254, 0.2);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-    min-width: 370px;
+    min-width: 400px;
     text-align: left;
     margin: 15px;
     position: relative;
@@ -48,44 +49,44 @@
   }
 
   .game-container {
-    background: linear-gradient(90deg, rgba(124, 58, 237, 0.1), rgba(0, 242, 254, 0.05));
-    border: 1px solid rgba(124, 58, 237, 0.3);
+    background: linear-gradient(90deg, rgba(124, 58, 237, 0.2), rgba(0, 242, 254, 0.1));
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .game-stats { display: flex; flex-direction: column; gap: 2px; }
-  .game-title { font-size: 10px; font-weight: 900; color: #9574f8; text-transform: uppercase; letter-spacing: 0.5px; }
+  .game-title { font-size: 11px; font-weight: 900; color: #9574f8d3; text-transform: uppercase; letter-spacing: 0.5px; }
   .game-level { font-size: 15px; font-weight: 900; color: #00ff87; text-shadow: 0 0 8px rgba(0,255,135,0.3); }
-  .game-xp { font-size: 12px; font-weight: 700; color: #e2e8f0; }
+  .game-xp { font-size: 13px; font-weight: 800; color: #e2e8f0; }
 
   .routine-status-panel {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     padding: 12px;
     border-radius: 12px;
     margin-bottom: 12px;
   }
   .status-item { display: flex; flex-direction: column; }
-  .status-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .status-label { font-size: 12px; color: #9eadc2; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 2px; }
   .status-value { font-size: 14px; font-weight: 900; }
-  .milestone-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 2px; }
+  .milestone-label { font-size: 12px; color: #9faec2; text-transform: uppercase; font-weight: 800; margin-bottom: 2px; }
   .milestone-value { font-size: 13px; font-weight: 900; }
 
   #display-timeline { color: #02c0fa; text-shadow: 0 0 8px rgba(0, 240, 255, 0.4); }
   #display-target { color: #00ff87; text-shadow: 0 0 8px rgba(0, 255, 135, 0.4); }
   #display-milestones { color: #00ffd5; text-shadow: 0 0 8px rgba(0, 240, 255, 0.4); }
 
-  .session-header { font-size: 24px; font-weight: 900; color: #ffaa00; text-transform: uppercase; margin-bottom: 2px; text-shadow: 0 0 15px rgba(255, 170, 0, 0.4); }
+  .session-header { font-size: 26px; font-weight: 900; color: #ffaa00; text-transform: uppercase; margin-bottom: 2px; text-shadow: 0 0 15px rgba(255, 170, 0, 0.4); }
   .timer-display { font-size: 34px; font-weight: 900; font-variant-numeric: tabular-nums; line-height: 1.1; margin-bottom: 4px; }
-  .state-force { color: #00f1fe; text-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
-  .state-break { color: #ff0055; text-shadow: 0 0 15px rgba(255, 0, 85, 0.5); }
+  .state-force { color: #00f1fe; text-shadow: 5px 5px 15px rgba(129, 242, 254, 0.5); }
+  .state-break { color: #ff0055; text-shadow: 5px 5px 15px rgba(255, 0, 85, 0.5); }
 
   .panic-box {
     display: grid;
@@ -96,24 +97,24 @@
 
 
   #discipline-tip{
-  margin-top:8px;
-  margin-bottom:8px;
+  margin-top:10px;
+  margin-bottom:5px;
   text-align:center;
 
   font-family:'Segoe UI',sans-serif;
-  font-size:13px;
-  font-weight:700;
+  font-size:15px;
+  font-weight:800;
 
-  color:#e2e8f0;
+  color:#e2e8f0ee;
   line-height:1.5;
 
   padding:10px 10px;
 
-  background:rgba(255,255,255,0.03);
+  background:rgba(255, 255, 255, 0.137);
   border:1px solid rgba(255,255,255,0.05);
   border-radius:10px;
 
-  transition:opacity .3s ease;
+  transition:opacity .5s ease;
 
   min-height:30px;
 
@@ -278,299 +279,97 @@
 */
 
 #goalBox{
-  margin-top:-4px;
-  margin-bottom:8px;
-  text-align:center;
-  line-height:1.5;
-
-  font-family:'Segoe UI', 'Roboto', sans-serif;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:0.3px;
-  color:#00ffd5;
-
-  animation: goalTextPulse 3s ease-in-out infinite;
-}
-#goalBox span:first-child{
-  text-shadow:0 0 10px rgba(0,255,135,.4);
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+margin:10px 0;
+padding:0;
+width:100%;
+box-sizing:border-box;
 }
 
-@keyframes goalTextPulse {
+#goalBox:has(.goal-card:only-child){
+grid-template-columns:1fr;
+}
 
-  0%,100%{
-    color:#7df9ff;
-    text-shadow:
-      0 0 4px rgba(125,249,255,.25);
-  }
+.goal-card{
+width:100%;
+box-sizing:border-box;
+padding:4px 2px;
+border-radius:10px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
 
-  50%{
-    color:#ffffff;
-    text-shadow:
-      0 0 8px rgba(125,249,255,.45),
-      0 0 16px rgba(125,249,255,.25);
-  }
+/* গুরুত্বপূর্ণ fix */
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+min-width:0;
+}
+
+.goal-card span{
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.goal-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.goal {
+  width: 48%;
 }
 
 .goal-name{
- color:#00ff87;
- animation:softGlow 3s infinite ease-in-out;
+display:block;
+font-size:16.5px;
+font-weight:900;
+color:#ffffff;
+animation:goalWhite 4s ease-in-out infinite;
 }
 
-.goal-hours{
- color:#38bdf8;
- animation:softGlow 3s infinite ease-in-out;
+.goal-done{
+display:block;
+font-size:13.5px;
+margin-top:6px;
+font-weight:800;
+color:#22c55e;
+animation:goalGreen 4s ease-in-out infinite;
+}
+
+.goal-left{
+display:block;
+font-size:13.5px;
+margin-top:4px;
+font-weight:800;
+color:#f59e0b;
+animation:goalOrange 4s ease-in-out infinite;
 }
 
 .goal-progress{
- color:#facc15;
- animation:softGlow 3s infinite ease-in-out;
+display:block;
+font-size:13.5px;
+margin-top:4px;
+font-weight:900;
+color:#38bdf8;
+animation:goalBlue 4s ease-in-out infinite;
 }
 
-.goal-left{
- color:#fb7185;
- animation:softGlow 3s infinite ease-in-out;
-}
-
-.goal-date{
- color:#d2d7df;
- animation:softGlow 3s infinite ease-in-out;
-}
-
-@keyframes softGlow{
- 0%,100%{
-   opacity:.8;
- }
- 50%{
-   opacity:1;
- }
-}
-
-
-
-.goal-name{
- color:#00ff87;
- animation:goalGlowGreen 2s infinite ease-in-out;
-}
-
-.goal-hours{
- color:#38bdf8;
- animation:goalGlowBlue 2s infinite ease-in-out;
-}
-
-.goal-progress{
- color:#facc15;
- animation:goalGlowYellow 2s infinite ease-in-out;
-}
-
-.goal-left{
- color:#fb7185;
- animation:goalGlowRed 2s infinite ease-in-out;
-}
-
-.goal-date{
- color:#cbd5e1;
- animation:goalGlowWhite 2s infinite ease-in-out;
-}
-
-@keyframes goalGlowGreen{
- 0%,100%{text-shadow:0 0 5px #00ff87;}
- 50%{text-shadow:0 0 18px #00ff87,0 0 28px #00ff87;}
-}
-
-@keyframes goalGlowBlue{
- 0%,100%{text-shadow:0 0 5px #38bdf8;}
- 50%{text-shadow:0 0 18px #38bdf8,0 0 28px #38bdf8;}
-}
-
-@keyframes goalGlowYellow{
- 0%,100%{text-shadow:0 0 5px #facc15;}
- 50%{text-shadow:0 0 18px #facc15,0 0 28px #facc15;}
-}
-
-@keyframes goalGlowRed{
- 0%,100%{text-shadow:0 0 5px #fb7185;}
- 50%{text-shadow:0 0 18px #fb7185,0 0 28px #fb7185;}
-}
-
-@keyframes goalGlowWhite{
- 0%,100%{text-shadow:0 0 5px #cbd5e1;}
- 50%{text-shadow:0 0 18px #cbd5e1,0 0 28px #cbd5e1;}
-}
-
-
-
-
-
-
-
-#goalBox{
-  margin-top:-4px;
-  margin-bottom:8px;
-  text-align:center;
-  line-height:1.6;
-
-  font-family:'Inter','Segoe UI',sans-serif;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.3px;
-
-  color:#e2e8f0;
-
-  animation:none;
-}
-
-.goal-name{
-  color:#ffffff;
-  text-shadow:0 0 8px rgba(255,255,255,.15);
-  animation:none;
-}
-
-.goal-hours{
-  color:#38bdf8;
-  text-shadow:none;
-  animation:none;
-}
-
-.goal-left{
-  color:#f59e0b;
-  text-shadow:none;
-  animation:none;
-}
-
-.goal-date{
-  color:#c7d1e0;
-  text-shadow:none;
-  animation:none;
-}
-
-
-
-
-.game-level,
-.timer-display,
-.status-value,
-.milestone-value,
-.game-title,
-.game-xp {
- animation: colorPulse 5s ease-in-out infinite;
-}
-
-@keyframes colorPulse {
-  0%,100%{
-    opacity:1;
-    text-shadow:0 0 6px currentColor;
-  }
-
-  50%{
-    opacity:1;
-    text-shadow:0 0 14px currentColor;
-  }
-}
-
-
-
-#streak-display{
-  font-size:15px;
-  font-weight:900;
-  color:#ff0000;
-  text-transform:uppercase;
-}
+@keyframes goalWhite{50%{text-shadow:0 0 18px #fff;}}
+@keyframes goalGreen{50%{text-shadow:0 0 18px #22c55e;}}
+@keyframes goalOrange{50%{text-shadow:0 0 18px #f59e0b;}}
+@keyframes goalBlue{50%{text-shadow:0 0 18px #38bdf8;}}
 
 #streak-title-display{
-  font-size:17px;
-  font-weight:700;
-  color:#00a5ec;
-  letter-spacing:1px;
+animation:goalWhite 4s ease-in-out infinite;
+font-weight:900;
+letter-spacing:.8px;
 }
-
-
-
-
-
-.goal-name,
-.goal-hours,
-.goal-left,
-.goal-date{
-  animation: goalColorShift 4s ease-in-out infinite;
-}
-
-@keyframes goalColorShift{
-
-  0%{
-    text-shadow:
-      0 0 5px rgba(0,255,135,.4),
-      0 0 12px rgba(0,255,135,.2);
-  }
-
-  25%{
-    text-shadow:
-      0 0 5px rgba(56,189,248,.5),
-      0 0 14px rgba(56,189,248,.3);
-  }
-
-  50%{
-    text-shadow:
-      0 0 5px rgba(250,204,21,.5),
-      0 0 14px rgba(250,204,21,.3);
-  }
-
-  75%{
-    text-shadow:
-      0 0 5px rgba(251,113,133,.5),
-      0 0 14px rgba(251,113,133,.3);
-  }
-
-  100%{
-    text-shadow:
-      0 0 5px rgba(0,255,135,.4),
-      0 0 12px rgba(0,255,135,.2);
-  }
-}
-
-
-
-
-
-.goal-name{
-  color:#00ff87;
-  animation:goalGlowGreen 2s infinite ease-in-out;
-}
-
-.goal-hours{
-  color:#38bdf8;
-  animation:goalGlowBlue 2s infinite ease-in-out;
-}
-
-.goal-left{
-  color:#f59e0b;
-  animation:goalGlowOrange 2s infinite ease-in-out;
-}
-
-.goal-date{
-  color:#ffffff;
-  animation:goalGlowWhite 2s infinite ease-in-out;
-}
-
-@keyframes goalGlowGreen{
-  0%,100%{text-shadow:0 0 5px #00ff87;}
-  50%{text-shadow:0 0 18px #00ff87;}
-}
-
-@keyframes goalGlowBlue{
-  0%,100%{text-shadow:0 0 5px #38bdf8;}
-  50%{text-shadow:0 0 18px #38bdf8;}
-}
-
-@keyframes goalGlowOrange{
-  0%,100%{text-shadow:0 0 5px #f59e0b;}
-  50%{text-shadow:0 0 18px #f59e0b;}
-}
-
-@keyframes goalGlowWhite{
-  0%,100%{text-shadow:0 0 5px #ffffff;}
-  50%{text-shadow:0 0 18px #ffffff;}
-}
-
 
 </style>
 </head>
@@ -581,14 +380,6 @@
   <div class="progress-container">
     <div class="progress-bar" id="live-progress"></div>
   </div>
-
-  <div class="game-container">
-    <div class="game-stats">
-      <span class="game-title">⚔️ ROUTINE RPG SYSTEM</span>
-      <span class="game-level" id="game-level-display">Level 1: DISCIPLINE</span>
-    </div>
-    <span class="game-xp" id="game-xp-display">XP: 0 / 100</span>
-  </div>
   
 
   <div class="game-container" style="margin-top:12px;">
@@ -596,14 +387,14 @@
       <span class="game-title">🎯 ACTIVE TARGET</span>
     
       <span class="game-level" id="streak-display">
-        0 DAYS
+        1 DAYS
       </span>
     
       <span id="goal-date-display"
       style="
-        font-size:12px;
-        font-weight:700;
-        color:#94a3b8;
+        font-size:13px;
+        font-weight:800;
+        color:#909fb6;
       ">
         -
       </span>
@@ -616,14 +407,14 @@
 
   <div id="goalBox"
   style="
-  margin-top:-4px;
-  margin-bottom:8px;
-  font-size:13px;
-  font-weight:700;
+  margin-top:12px;
+  margin-bottom:16px;
+  font-size:15px;
+  font-weight:800;
   text-align:center;
   line-height:1.7;
   font-family:'Segoe UI',Roboto,sans-serif;
-  letter-spacing:0.3px;
+  letter-spacing:0.5px;
   ">
   No Goals Yet
   </div>
@@ -632,15 +423,15 @@
 
     <div class="status-item">
       <span class="status-label">📅 Day Timeline</span>
-      <span class="status-value" id="display-timeline">10:10 AM - 03:40 AM</span>
+      <span class="status-value" id="display-timeline">10:10 AM - 03:55 AM</span>
     </div>
     <div class="status-item">
       <span class="status-label">🎯 Target Total</span>
-      <span class="status-value" id="display-target">14 SESSIONS (60/10)</span>
+      <span class="status-value" id="display-target">14 SESSIONS (14/9)</span>
     </div>
-    <div class="status-item" style="grid-column: span 2; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 6px; margin-top: 2px;">
-      <span class="milestone-label">🍱 Milestones (Lunch | Nap | Dinner)</span>
-      <span class="milestone-value" id="display-milestones">Lunch: S3 (20m) | Nap: S5 (40m) | Dinner: S9 (20m)</span>
+    <div class="status-item" style="grid-column: span 2; border-top: 2px solid rgba(255, 255, 255, 0.098); padding-top: 6px; margin-top: 10px;">
+      <span class="milestone-label">🍱ALL Breaks (Lunch | Nap | Dinner)</span>
+      <span class="milestone-value" id="display-milestones">Lunch: S3 (20m) | Nap: S5 (40m) | Dinner: S10 (20m)</span>
     </div>
   </div>
 
@@ -651,32 +442,6 @@
   <div id="discipline-tip">
     Loading wisdom...
     </div>
-
-
-
-
-
-    <button id="rewardBtn"
-    style="
-    width:100%;
-    margin-top:6px;
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    font-weight:900;
-    font-size:12px;
-    background:linear-gradient(90deg,#ffaa00,#ff6600);
-    color:white;
-    cursor:pointer;
-    opacity:.4;
-    ">
-    🎁 REWARD 
-    </button>
-
-
-
-
-
 
 
   <div class="control-panel">
@@ -697,12 +462,12 @@
       </div>
       <div class="input-row">
         <label>Day End Time:</label>
-        <input type="text" id="end-time-input" class="control-input" value="03:50 AM">
+        <input type="text" id="end-time-input" class="control-input" value="3:55 AM">
       </div>
     </div>
     <div class="input-row">
       <label>Breaks Description:</label>
-      <input type="text" id="milestones-input" class="control-input" value="Lunch: S3 (20m) | Nap: S5 (40m) | Dinner: S9 (20m)">
+      <input type="text" id="milestones-input" class="control-input" value="Lunch: S3 (20m) | Nap: S5 (40m) | Dinner: S10 (20m)">
     </div>
     <div class="motivation-player-box">
       <span class="motivation-title">⚡ Instant Discipline Booster</span>
@@ -776,6 +541,7 @@ document.getElementById('goal-date-display');
   let countdownInterval = null;
   let totalSeconds = 60 * 60; 
   let maxSeconds = 60 * 60;
+  let forceCompleted = false;
   let isCounting = false;
   let currentMode = 'FORCE'; 
   
@@ -800,7 +566,7 @@ document.getElementById('goal-date-display');
       const lastReset = localStorage.getItem("lastResetDate");
       const today = now.toDateString();
       
-      if (now.getHours() >= 6 && lastReset !== today) {
+      if (now.getHours() >= 4 && lastReset !== today) {
           if (currentSessionCount < 10) streakDays = 0;
           currentSessionCount = 0;
           playerXP = 0;
@@ -864,8 +630,10 @@ document.getElementById('goal-date-display');
     }
     updateGameUI();
     saveAll();
-    gameXpDisplay.style.color = "#ff0055";
-    setTimeout(() => { gameXpDisplay.style.color = "#e2e8f0"; }, 500);
+    if(gameXpDisplay){
+ gameXpDisplay.style.color = "#ff0055";
+ setTimeout(() => { gameXpDisplay.style.color = "#e2e8f0"; }, 500);
+}
   }
 
   function playSelectedQuote(num) {
@@ -894,7 +662,17 @@ document.getElementById('goal-date-display');
     window.speechSynthesis.speak(utterance);
   }
 
-  function configureUtterance(utterance) {
+  
+function playAutoMotivation(){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const msg = "Nasir, keep moving forward. Every completed session is bringing you closer to your goals. Stay focused, stay disciplined, and win the next hour.";
+  const u = new SpeechSynthesisUtterance(msg);
+  configureUtterance(u);
+  window.speechSynthesis.speak(u);
+}
+
+function configureUtterance(utterance) {
     utterance.volume = 1.0; utterance.rate = 0.95; utterance.pitch = 1.0;
     const voices = window.speechSynthesis.getVoices();
     const englishVoice = voices.find(voice => voice.lang.includes('en-US') || voice.lang.includes('en-GB'));
@@ -941,9 +719,14 @@ document.getElementById('goal-date-display');
   }
 
   function updateGameUI() {
-    gameLevelDisplay.innerText = `Level ${playerLevel}: ${levelTitles[playerLevel] || "LEGEND RISING"}`;
-    gameXpDisplay.innerText = `XP: ${playerXP} / 100`;
-  }
+    if(gameLevelDisplay){
+      gameLevelDisplay.innerText = `Level ${playerLevel}: ${levelTitles[playerLevel] || "LEGEND RISING"}`;
+    }
+
+    if(gameXpDisplay){
+      gameXpDisplay.innerText = `XP: ${playerXP} / 100`;
+    }
+}
 
   /* function updateLongTermProgress() {
     // Percentage calculation based on total 2520 sessions (180 days * 14 sessions)
@@ -1010,6 +793,10 @@ sessionDisplay.innerText =
 
 if(isCounting) return;
 
+if(totalSeconds === 0 && currentMode === 'FORCE' && forceCompleted){
+  return;
+}
+
 isCounting = true;
 
 countdownInterval = setInterval(()=>{
@@ -1032,6 +819,7 @@ if(totalSeconds === 0){
 
         currentSessionCount++;
         totalLifetimeSessions++;
+        forceCompleted = true;
 
         awardXP();
         updateStreak();
@@ -1052,28 +840,12 @@ if(totalSeconds === 0){
         updateActiveGoalBox();
 
 
-        rewardUnlocked = true;
-
-        const rewardBtn =
-        document.getElementById("rewardBtn");
-
-        rewardBtn.innerText = "🎁 CLAIM REWARD";
-        rewardBtn.style.opacity = "1";
-        rewardBtn.style.boxShadow =
-        "0 0 20px #ffaa00";
-
-
-        alert(
-        "Session Complete! Total Sessions: "
-        + currentSessionCount
-        );
+        alert("Session Complete! Total Sessions: " + currentSessionCount); setTimeout(playAutoMotivation,500);
 
 
     } else {
 
-        alert(
-        "Break Complete! Now start your next study session."
-        );
+        alert("Break Complete! Now start your next study session."); setTimeout(playAutoMotivation,500);
 
     }
 
@@ -1281,6 +1053,7 @@ if(totalSeconds === 0){
 
         currentSessionCount++;
         totalLifetimeSessions++;
+        forceCompleted = true;
 
         awardXP();
         updateStreak();
@@ -1305,17 +1078,12 @@ if(totalSeconds === 0){
         updateUI();
 
 
-        alert(
-        "Session Complete! Total Sessions: "
-        + currentSessionCount
-        );
+        alert("Session Complete! Total Sessions: " + currentSessionCount); setTimeout(playAutoMotivation,500);
 
 
     } else {
 
-        alert(
-        "Break Complete! Now start your next study session."
-        );
+        alert("Break Complete! Now start your next study session."); setTimeout(playAutoMotivation,500);
 
     }
 
@@ -1332,74 +1100,14 @@ if(totalSeconds === 0){
 
 
 
-let rewardUnlocked = false;
-
-const breakRewards = [
-"🚶 Walk for 5 minutes",
-"💧 Drink water",
-"☕ Make coffee",
-"🧘 Deep breathing",
-"🌞 Get sunlight",
-"🤸 Stretch body",
-"🎵 Listen to a song",
-"👀 Rest your eyes",
-"🍎 Eat fruit",
-"🚿 Wash face",
-"📱 Check messages 5 min",
-"🏠 Clean desk",
-"📚 Read 2 pages",
-"🌿 Go outside",
-"🙏 Gratitude break",
-"💪 20 pushups",
-"🦵 Light exercise",
-"🎯 Review goals",
-"🛏️ Power rest",
-"😌 Relax quietly"
-];
-
-document.getElementById("rewardBtn").onclick = function(){
-
- if(!rewardUnlocked){
-   alert("Complete a session first!");
-   return;
- }
-
- rewardUnlocked = false;
-
- const reward =
- breakRewards[Math.floor(Math.random()*breakRewards.length)];
-
- const quoteBox =
- document.getElementById("discipline-tip");
-
-
-
- quoteBox.innerText = reward;
-
-this.innerText = "🔒 REWARD USED";
-this.style.opacity = ".4";
-this.style.boxShadow = "none";
-
-setTimeout(()=>{
-
-  quoteBox.innerText =
-  disciplineTips[
-    Math.floor(Math.random()*disciplineTips.length)
-  ];
-
-},10000);
-};
-
-
-
 
   // Initializing
   checkAndReset();
   btnStart.addEventListener('click', startTimer);
   btnPause.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; });
   btnReset.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; totalSeconds = parseInt(timeInput.value) * 60; maxSeconds = totalSeconds; updateUI(); });
-  btnSetForce.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'FORCE'; totalSeconds = 60 * 60; maxSeconds = totalSeconds; updateUI(); });
-  btnSetBreak.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'BREAK'; totalSeconds = 9 * 60; maxSeconds = totalSeconds; updateUI(); });
+  btnSetForce.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'FORCE'; totalSeconds = 60 * 60; maxSeconds = totalSeconds; forceCompleted = false; updateUI(); });
+  btnSetBreak.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'BREAK'; totalSeconds = 8 * 60; maxSeconds = totalSeconds; updateUI(); });
   
   updateUI(); updateGameUI(); updateStreakUI();
 </script>
@@ -1442,14 +1150,16 @@ const leftHours =
 Math.max(0, g.target - g.hours).toFixed(0);
 
 return `
-<span class="goal-name">${name}</span>
-<span class="goal-hours"> | ${g.hours}H Done</span>
-<span class="goal-left"> | -${leftHours}H Left</span>
-<span class="goal-date"> | ${percent}%</span>
+<div class="goal-card">
+<span class="goal-name">🎯 ${name}</span>
+<span class="goal-done">${g.hours}H Done</span>
+<span class="goal-left">${leftHours}H Left</span>
+<span class="goal-progress">${percent}% Progress</span>
+</div>
 `;
 
 
-    }).join('<br>');
+    }).join('');
   }
   
   function renderGoalButtons() {
@@ -1575,10 +1285,10 @@ document.getElementById('createGoal').style.background =
         target: t,
         goalDays: days,
         since: new Date().toLocaleDateString('en-GB', {
-          day: 'numeric',
-          month: 'short',
-          year: 'numeric'
-        })
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric'
+})
       };
   
       selectedGoal = n;
@@ -1684,66 +1394,51 @@ alert("🗑️ Goal Deleted Successfully!");
     updateActiveGoalBox();
   });
 
-  
-
   function updateActiveGoalBox(){
 
-
 if(!selectedGoal || !goals[selectedGoal]){
-
-goalDateDisplay.innerText = "-";
-
-streakDisplay.innerText = "0 DAYS";
-
-streakTitleDisplay.innerText = "NO TARGET";
-
-return;
+  goalDateDisplay.innerText = "-";
+  streakDisplay.innerText = "1 DAYS";
+  streakTitleDisplay.innerText = "NO TARGET";
+  return;
 }
 
-
-
 const g = goals[selectedGoal];
-goalDateDisplay.innerText = g.since;
 
-
-
+// fixed created date
 const created = new Date(g.since);
 const now = new Date();
 
-// 6AM reset system
+// BD 4AM reset logic (তোমার সিস্টেম অনুযায়ী)
 const currentDay = new Date(now);
-
-if(currentDay.getHours() < 6){
+if(currentDay.getHours() < 4){
   currentDay.setDate(currentDay.getDate() - 1);
 }
-
-currentDay.setHours(6,0,0,0);
+currentDay.setHours(4,0,0,0);
 
 const startDay = new Date(created);
-startDay.setHours(6,0,0,0);
+startDay.setHours(4,0,0,0);
 
-const daysPassed = Math.max(
-  0,
-  Math.floor(
-    (currentDay - startDay) /
-    (1000 * 60 * 60 * 24)
-  )
+// total days passed (NO negative)
+let daysPassed = Math.floor(
+  (currentDay - startDay) / (1000 * 60 * 60 * 24)
 );
 
-const daysLeft =
-Math.max(
-  0,
-  g.goalDays - daysPassed
-);
+if(daysPassed < 1) daysPassed = 1;
 
-streakDisplay.innerText =
-`${daysLeft} DAYS LEFT`;
+// remaining days
+const daysLeft = Math.max(1, g.goalDays - daysPassed);
 
+// UI FIXED OUTPUT
+streakDisplay.innerText = `DAY ${daysPassed} OF ${g.goalDays}`;
 
-streakTitleDisplay.innerText =
-selectedGoal.toUpperCase();
+streakTitleDisplay.innerText = selectedGoal.toUpperCase();
 
+goalDateDisplay.innerText =
+`${daysLeft} DAYS LEFT • Since ${g.since}`;
 }
+
+  
 setInterval(updateDisciplineTip,3500);
 updateDisciplineTip();
 updateActiveGoalBox();
@@ -1754,5 +1449,5 @@ setInterval(() => {
   </script>
 
 
-</body>
+</body> 
 </html>
