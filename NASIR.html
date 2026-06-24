@@ -60,8 +60,8 @@
   }
   .game-stats { display: flex; flex-direction: column; gap: 2px; }
   .game-title { font-size: 11px; font-weight: 900; color: #9574f8d3; text-transform: uppercase; letter-spacing: 0.5px; }
-  .game-level { font-size: 15px; font-weight: 900; color: #00ff87; text-shadow: 0 0 8px rgba(0,255,135,0.3); }
-  .game-xp { font-size: 13px; font-weight: 800; color: #e2e8f0; }
+  .game-level { font-size: 16px; font-weight: 900; color: #00ff87; text-shadow: 0 0 8px rgba(0,255,135,0.3); }
+  .game-xp { font-size: 15px; font-weight: 800; color: #eaeff5; }
 
   .routine-status-panel {
     display: grid;
@@ -431,7 +431,7 @@ letter-spacing:.8px;
     </div>
     <div class="status-item" style="grid-column: span 2; border-top: 2px solid rgba(255, 255, 255, 0.098); padding-top: 6px; margin-top: 10px;">
       <span class="milestone-label">🍱ALL Breaks (Lunch | Nap | Dinner)</span>
-      <span class="milestone-value" id="display-milestones">Lunch: S3 (20m) | Nap: S5 (40m) | Dinner: S10 (20m)</span>
+      <span class="milestone-value" id="display-milestones">Lunch: S3 (20m) | Nap: S5 (45m) | Dinner: S10 (25m)</span>
     </div>
   </div>
 
@@ -458,16 +458,16 @@ letter-spacing:.8px;
     <div class="input-grid">
       <div class="input-row">
         <label>Day Start Time:</label>
-        <input type="text" id="start-time-input" class="control-input" value="10:10 AM">
+        <input type="text" id="start-time-input" class="control-input" value="10:15 AM">
       </div>
       <div class="input-row">
         <label>Day End Time:</label>
-        <input type="text" id="end-time-input" class="control-input" value="3:55 AM">
+        <input type="text" id="end-time-input" class="control-input" value="3:50 AM">
       </div>
     </div>
     <div class="input-row">
       <label>Breaks Description:</label>
-      <input type="text" id="milestones-input" class="control-input" value="Lunch: S3 (20m) | Nap: S5 (40m) | Dinner: S10 (20m)">
+      <input type="text" id="milestones-input" class="control-input" value="Lunch: S3 (20m) | Nap: S5 (40m) | Dinner: S10 (25m)">
     </div>
     <div class="motivation-player-box">
       <span class="motivation-title">⚡ Instant Discipline Booster</span>
@@ -789,76 +789,6 @@ sessionDisplay.innerText =
 
   function formatTime(s) { return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
 
-  function startTimer() {
-
-if(isCounting) return;
-
-if(totalSeconds === 0 && currentMode === 'FORCE' && forceCompleted){
-  return;
-}
-
-isCounting = true;
-
-countdownInterval = setInterval(()=>{
-
-if(totalSeconds > 0){
-
-    totalSeconds--;
-    updateUI();
-
-}
-
-
-if(totalSeconds === 0){
-
-    clearInterval(countdownInterval);
-    isCounting = false;
-
-
-    if(currentMode === 'FORCE'){
-
-        currentSessionCount++;
-        totalLifetimeSessions++;
-        forceCompleted = true;
-
-        awardXP();
-        updateStreak();
-        saveAll();
-
-
-        if(selectedGoal && goals[selectedGoal]){
-
-            goals[selectedGoal].hours =
-            Number(goals[selectedGoal].hours) + 1;
-
-            saveGoals();
-
-        }
-
-
-        renderGoals();
-        updateActiveGoalBox();
-
-
-        alert("Session Complete! Total Sessions: " + currentSessionCount); setTimeout(playAutoMotivation,500);
-
-
-    } else {
-
-        alert("Break Complete! Now start your next study session."); setTimeout(playAutoMotivation,500);
-
-    }
-
-
-    totalSeconds = 0;
-    updateUI();
-
-}
-
-
-},1000);
-
-}
   
 const disciplineTips = [
 "Success is not final, failure is not fatal. – Winston Churchill",
@@ -1031,6 +961,12 @@ function updateDisciplineTip(){
 function startTimer() {
 
 if(isCounting) return;
+if(currentMode === 'FORCE' && totalSeconds === 0 && forceCompleted){
+    totalSeconds = 60 * 60;
+    maxSeconds = totalSeconds;
+    forceCompleted = false;
+    updateUI();
+}
 
 isCounting = true;
 
@@ -1054,6 +990,8 @@ if(totalSeconds === 0){
         currentSessionCount++;
         totalLifetimeSessions++;
         forceCompleted = true;
+        totalSeconds = 60 * 60;
+maxSeconds = totalSeconds;
 
         awardXP();
         updateStreak();
@@ -1088,12 +1026,13 @@ if(totalSeconds === 0){
     }
 
 
-    // lock at 00:00
-    totalSeconds = 0;
-    updateUI();
+    // prepare next session automatically
+totalSeconds = 60 * 60;
+maxSeconds = totalSeconds;
+forceCompleted = true;
 
+updateUI();
 }
-
 },1000);
 
 }
@@ -1107,7 +1046,7 @@ if(totalSeconds === 0){
   btnPause.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; });
   btnReset.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; totalSeconds = parseInt(timeInput.value) * 60; maxSeconds = totalSeconds; updateUI(); });
   btnSetForce.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'FORCE'; totalSeconds = 60 * 60; maxSeconds = totalSeconds; forceCompleted = false; updateUI(); });
-  btnSetBreak.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'BREAK'; totalSeconds = 8 * 60; maxSeconds = totalSeconds; updateUI(); });
+  btnSetBreak.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'BREAK'; totalSeconds = 9 * 60; maxSeconds = totalSeconds; updateUI(); });
   
   updateUI(); updateGameUI(); updateStreakUI();
 </script>
@@ -1116,6 +1055,7 @@ if(totalSeconds === 0){
   let selectedGoal = localStorage.getItem('selectedGoal') || null;;
   let deleteConfirmCount = 0;
   let resetConfirmCount = 0;
+  let sessionResetConfirmCount = 0;
   
   function saveGoals() {
     localStorage.setItem('goals_v3', JSON.stringify(goals));
@@ -1236,6 +1176,8 @@ updateActiveGoalBox();
       <input id="goalDays" class="control-input" placeholder="Days" style="width:50px">
       <button id="createGoal">Create</button>
       <button id="startGoalBtn">Start</button>
+      <button id="resetSessionsBtn">Sessions</button>
+      <button id="addSessionBtn">+ Session</button>
     </div>
     `;
   
@@ -1250,14 +1192,17 @@ updateActiveGoalBox();
 
 document.getElementById('resetGoal').style.background =
 'linear-gradient(90deg,#f59e0b,#d97706)';
-
+document.getElementById('resetSessionsBtn').style.background =
+'linear-gradient(90deg,#dc2626,#7f1d1d)';
+document.getElementById('addSessionBtn').style.background =
+'linear-gradient(90deg,#22c55e,#16a34a)';
 document.getElementById('delGoal').style.background =
 'linear-gradient(90deg,#ef4444,#b91c1c)';
 
 document.getElementById('createGoal').style.background =
 'linear-gradient(90deg,#3b82f6,#1d4ed8)';
 
-['addHr','resetGoal','delGoal','createGoal','startGoalBtn'].forEach(id=>{
+['addHr','resetGoal','delGoal','createGoal','startGoalBtn',`resetSessionsBtn`,`addSessionBtn`].forEach(id=>{
   const btn=document.getElementById(id);
 
   btn.style.color='white';
@@ -1405,11 +1350,51 @@ document.getElementById('startGoalBtn').onclick=()=>{
  renderGoals();
  updateActiveGoalBox();
 };
+document.getElementById('resetSessionsBtn').onclick = () => {
+
+sessionResetConfirmCount++;
+
+if(sessionResetConfirmCount < 10){
+
+alert(
+`⚠️ Press ${10 - sessionResetConfirmCount} more times to reset today's sessions`
+);
+
+return;
+}
+
+currentSessionCount = 0;
+
+sessionResetConfirmCount = 0;
+
+saveAll();
+updateUI();
+
+alert("🔄 Today's Sessions Reset Successfully!");
+
+};
+
+document.getElementById('addSessionBtn').onclick = () => {
+
+if (isCounting && currentMode === 'FORCE') {
+  alert("Stop timer first");
+  return;
+}
+
+currentSessionCount++;
+totalLifetimeSessions++;
+
+saveAll();
+updateUI();
+
+alert("✅ Session Added!");
+};
 
 renderGoals();
     renderGoalButtons();
     updateActiveGoalBox();
   });
+
 
   function updateActiveGoalBox(){
 
@@ -1430,7 +1415,7 @@ if(!g.isStarted){
 }
 
 // fixed created date
-const created = new Date(g.since);
+const created = new Date(g.startDate || g.since);
 const now = new Date();
 
 // BD 4AM reset logic (তোমার সিস্টেম অনুযায়ী)
@@ -1451,7 +1436,7 @@ let daysPassed = Math.floor(
 if(daysPassed < 1) daysPassed = 1;
 
 // remaining days
-const daysLeft = Math.max(1, g.goalDays - daysPassed);
+const daysLeft = Math.max(0, g.goalDays - daysPassed);
 
 // UI FIXED OUTPUT
 streakDisplay.innerText = `DAY ${daysPassed} OF ${g.goalDays}`;
