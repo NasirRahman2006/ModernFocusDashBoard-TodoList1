@@ -581,7 +581,7 @@ letter-spacing:.8px;
     </div>
     <div class="status-item">
       <span class="status-label">🎯 Target Total</span>
-      <span class="status-value" id="display-target">14 SESSIONS (14/9)</span>
+      <span class="status-value" id="display-target">10 SESSIONS (90/10)</span>
     </div>
     <div class="status-item" style="grid-column: span 2; border-top: 2px solid rgba(255, 255, 255, 0.098); padding-top: 6px; margin-top: 10px;">
       <span class="milestone-label">🍱ALL Breaks (Lunch | Rest | Dinner)</span>
@@ -589,9 +589,9 @@ letter-spacing:.8px;
     </div>
   </div>
 
-  <div class="session-header" id="session-display">SESSION 0/14</div>
+  <div class="session-header" id="session-display">SESSION 0/10</div>
   
-  <div class="timer-display state-force" id="timer-display">FORCE TIME: 60:00</div>
+  <div class="timer-display state-force" id="timer-display">FORCE TIME: 90:00</div>
 
   <div id="discipline-tip">
     Loading wisdom...
@@ -605,23 +605,23 @@ letter-spacing:.8px;
         <input type="text" id="session-input" class="control-input" value="0" disabled>
       </div>
       <div class="input-row">
-        <label>Set Time (m) [Min 60m Lock]:</label>
-        <input type="number" id="time-input" class="control-input" value="60" min="60">
+        <label>Set Time (m) [Min 90m Lock]:</label>
+        <input type="number" id="time-input" class="control-input" value="90" min="60">
       </div>
     </div>
     <div class="input-grid">
       <div class="input-row">
         <label>Day Start Time:</label>
-        <input type="text" id="start-time-input" class="control-input" value="10:15 AM">
+        <input type="text" id="start-time-input" class="control-input" value="9:20 AM">
       </div>
       <div class="input-row">
         <label>Day End Time:</label>
-        <input type="text" id="end-time-input" class="control-input" value="3:55 AM">
+        <input type="text" id="end-time-input" class="control-input" value="2:50 AM">
       </div>
     </div>
     <div class="input-row">
       <label>Breaks Description:</label>
-      <input type="text" id="milestones-input" class="control-input" value="LUNCH: S3 (20m) | REST: S6 (1h) | DINNER: S10 (25m)">
+      <input type="text" id="milestones-input" class="control-input" value="LUNCH: S3 (20m) | REST: S4 (1h) | DINNER: S7 (30m)">
     </div>
     <div class="motivation-player-box">
       <span class="motivation-title">⚡ Instant Discipline Booster</span>
@@ -693,8 +693,8 @@ document.getElementById('goal-date-display');
   const trackingSinceDisplay = document.getElementById('tracking-since-display');
 
   let countdownInterval = null;
-  let totalSeconds = 60 * 60; 
-  let maxSeconds = 60 * 60;
+  let totalSeconds = 90 * 60; 
+  let maxSeconds = 90 * 60;
   let forceCompleted = false;
   let isCounting = false;
   let currentMode = 'FORCE'; 
@@ -827,8 +827,8 @@ let msg = "";
 
 if(currentMode === 'FORCE'){
 
-msg =
-"Great job Nasir. You completed another force session. Now take your nine minute recovery break. Drink water, stretch your body, rest your eyes and prepare for the next battle. Remember what David Goggins says, discipline is doing what others refuse to do. Every session completed moves you closer to Successful in life, closer to becoming a professional programmer, and closer to your dream life in Germany or America. Use this break wisely. Do not scroll social media. Recharge and get ready for the next mission.";
+  msg =
+  "Excellent work, Nasir. Another session is complete. While thousands of people wasted the last ninety minutes scrolling social media, you invested it in building your future. Every line of code you write brings you closer to becoming a software engineer. Every session moves you one step closer to Dhaka University, one step closer to Germany, Norway, America or Australia. One day your dream girl will see the man who never gave up. Take your short break, recover, and come back stronger. Winners are built one session at a time.";
 
 }else{
 
@@ -943,10 +943,10 @@ function configureUtterance(utterance) {
     }
 
     const sessionPercent =
-Math.floor((currentSessionCount / 14) * 100);
+Math.floor((currentSessionCount / 10) * 100);
 
 sessionDisplay.innerText =
-`SESSION ${currentSessionCount}/14 (${sessionPercent}%)`;
+`SESSION ${currentSessionCount}/10 (${sessionPercent}%)`;
     sessionInput.value = currentSessionCount;
     displayTimeline.innerText = `${startTimeInput.value} - ${endTimeInput.value}`;
     displayMilestones.innerText = milestonesInput.value;
@@ -1139,7 +1139,7 @@ function startTimer() {
 
 if(isCounting) return;
 if(currentMode === 'FORCE' && totalSeconds === 0 && forceCompleted){
-    totalSeconds = 60 * 60;
+    totalSeconds = parseInt(timeInput.value) * 60;
     maxSeconds = totalSeconds;
     forceCompleted = false;
     updateUI();
@@ -1168,7 +1168,9 @@ if(totalSeconds === 0){
 currentSessionCount++;
 try{
   window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance("Great job Nasir. You completed another force session. Now take your nine minute recovery break. Drink water, stretch your body, rest your eyes and prepare for the next battle. Remember what David Goggins says, discipline is doing what others refuse to do. Every session completed moves you closer to Dhaka University, closer to becoming a professional programmer, and closer to your dream life in Germany or America. Use this break wisely. Do not scroll social media. Recharge and get ready for the next mission.");
+  const u = new SpeechSynthesisUtterance(
+"Excellent work, Nasir. Another session is complete. While thousands of people wasted the last ninety minutes scrolling social media, you invested it in building your future. Every line of code you write brings you closer to becoming a software engineer. Every session moves you one step closer to Dhaka University, one step closer to Germany, Norway, America or Australia. One day your dream girl will see the man who never gave up. Take your short break, recover, and come back stronger. Winners are built one session at a time."
+);
   if(typeof configureUtterance==='function') configureUtterance(u);
   window.speechSynthesis.speak(u);
 }catch(e){}
@@ -1186,9 +1188,10 @@ maxSeconds = totalSeconds;
         // goal +1 hour
         if(selectedGoal && goals[selectedGoal]){
 
-            goals[selectedGoal].hours =
-            Number(goals[selectedGoal].hours) + 1;
-
+const sessionHours = parseInt(timeInput.value) / 60;
+goals[selectedGoal].hours =
+Number(goals[selectedGoal].hours) + sessionHours;
+          
             saveGoals();
 
         }
@@ -1212,7 +1215,8 @@ maxSeconds = totalSeconds;
 
 
     // prepare next session automatically
-totalSeconds = 60 * 60;
+// prepare next session automatically
+totalSeconds = parseInt(timeInput.value) * 60;
 maxSeconds = totalSeconds;
 forceCompleted = true;
 
@@ -1230,8 +1234,9 @@ updateUI();
   btnStart.addEventListener('click', startTimer);
   btnPause.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; });
   btnReset.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; totalSeconds = parseInt(timeInput.value) * 60; maxSeconds = totalSeconds; updateUI(); });
-  btnSetForce.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'FORCE'; totalSeconds = 60 * 60; maxSeconds = totalSeconds; forceCompleted = false; updateUI(); });
-  btnSetBreak.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'BREAK'; totalSeconds = 9 * 60; maxSeconds = totalSeconds; updateUI(); });
+  btnSetForce.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'FORCE';     totalSeconds = parseInt(timeInput.value) * 60;
+  maxSeconds = totalSeconds; forceCompleted = false; updateUI(); });
+  btnSetBreak.addEventListener('click', () => { clearInterval(countdownInterval); isCounting = false; currentMode = 'BREAK'; totalSeconds = 10 * 60; maxSeconds = totalSeconds; updateUI(); });
   
   updateUI(); updateGameUI(); updateStreakUI();
 </script>
@@ -1272,7 +1277,7 @@ updateUI();
 ).toFixed(1);
 
 const leftHours =
-Math.max(0, g.target - g.hours).toFixed(0);
+Math.max(0, g.target - g.hours).toFixed(1);
 
 return `
 <div class="goal-card">
